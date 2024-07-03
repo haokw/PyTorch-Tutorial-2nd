@@ -68,9 +68,10 @@ def main():
 
             self.img_info = [(os.path.join(self.root_dir, i.split()[0]), int(i.split()[2]))
                              for i in txt_data]
+
     # you can download the datasets from
     # https://pan.baidu.com/s/18BsxploWR3pbybFtNsw5fA  code：pyto
-    root_dir = r"E:\pytorch-tutorial-2nd\data\datasets\covid-19-demo"  # path to datasets——covid-19-demo
+    root_dir = r"../../data/datasets/covid-19-demo"  # path to datasets——covid-19-demo
     img_dir = os.path.join(root_dir, "imgs")
     path_txt_train = os.path.join(root_dir, "labels", "train.txt")
     path_txt_valid = os.path.join(root_dir, "labels", "valid.txt")
@@ -102,6 +103,7 @@ def main():
     loss_f = nn.CrossEntropyLoss()
     optimizer = optim.SGD(model.parameters(), lr=0.1, momentum=0.9, weight_decay=5e-4)
     scheduler = optim.lr_scheduler.StepLR(optimizer, gamma=0.1, step_size=50)
+
     # step 4/4 : 迭代模块
     for epoch in range(100):
         # 训练集训练
@@ -149,3 +151,20 @@ def main():
 if __name__ == "__main__":
     main()
 
+
+"""
+问题提出：
+图像数据是哪用一行代码读取进来的？
+transforms.Compose是如何工作对图像数据进行转换的？
+ToTensor又有哪些操作？
+自己如何编写Dataset？
+DataLoader有什么功能？如何使用？有什么需要注意的？
+模型如何按自己的数据流程搭建？
+nn有哪些网络层可以调用？
+损失函数有哪些？
+优化器是如何更新model参数的？
+学习率调整有哪些方法？如何设置它们的参数？
+model.train()与model.eval()作用是什么？
+optimizer.zero_grad()是做什么？为什么要梯度清零？
+scheduler.step() 作用是什么？应该放在哪个for循环里？
+"""
